@@ -19,7 +19,9 @@ while True:
             with open('./files/todos.txt', 'r') as file:
                 todos = file.readlines()
             
-            for index, item in enumerate(todos):
+            new_todos = [item.strip('\n') for item in todos]
+            
+            for index, item in enumerate(new_todos):
                 row = f"{index + 1}. {item.title()}"
                 print(row)   
         case 'edit':
