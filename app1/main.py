@@ -1,19 +1,27 @@
 user_prompt = "Enter a todo: "
 
-todos = []
-
 while True:
     user_action = input("Type add, show, edit, complete or exit: ")
     user_action = user_action.strip().lower()
 
     match user_action:
         case 'add': 
-            todo = input(user_prompt)
+            todo = input(user_prompt) + '\n'
+
+            with open('./files/todos.txt', 'r') as file:
+                todos = file.readlines()
+            
             todos.append(todo)
+
+            with open('./files/todos.txt', 'w') as file:
+                file.writelines(todos)
         case 'show':
+            with open('./files/todos.txt', 'r') as file:
+                todos = file.readlines()
+            
             for index, item in enumerate(todos):
                 row = f"{index + 1}. {item.title()}"
-                print(row)
+                print(row)   
         case 'edit':
             number = int(input("Number of the todo to edit: "))
             number =- 1
