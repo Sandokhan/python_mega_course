@@ -1,19 +1,7 @@
+# from functions import get_todos, write_todos
+import functions
+
 user_prompt = "Enter a todo: "
-
-def get_todos(filename):
-    """ Read a text file and return the list of
-     to-do items.
-    """
-    with open(f'./files/{filename}', 'r') as file:
-        todos = file.readlines()
-    return todos
-
-
-def write_todos(filename, todos_args):
-    """ Write the to-do item list in the file. """
-    with open(f'./files/{filename}', 'w') as file:
-        file.writelines(todos_args)
-    return None
 
 while True:
     user_action = input("Type add, show, edit, complete or exit: ")
@@ -24,15 +12,15 @@ while True:
 
         todo = user_action[4:]
 
-        todos = get_todos('todos.txt')
+        todos = functions.get_todos('todos.txt')
         
         todos.append(todo + '\n')
 
-        write_todos('todos.txt', todos)
+        functions.write_todos('todos.txt', todos)
 
     elif user_action.startswith('show'):
 
-        todos = get_todos('todos.txt')
+        todos = functions.get_todos('todos.txt')
         
         new_todos = [item.strip('\n') for item in todos]
         
@@ -46,12 +34,12 @@ while True:
             number = int(user_action[5:]) 
             number =- 1
 
-            todos = get_todos('todos.txt')
+            todos = functions.get_todos('todos.txt')
             
             new_todo = input("Enter new todo: ")
             todos[number] = new_todo + '\n'
 
-            write_todos('todos.txt', todos)
+            functions.write_todos('todos.txt', todos)
         
         except ValueError:
             print("Your command is not valid.")
@@ -62,13 +50,13 @@ while True:
         try:
             number = int(user_action[9:])
             
-            todos = get_todos('todos.txt')
+            todos = functions.get_todos('todos.txt')
             
             index = number - 1
             todo_to_remove = todos[index].strip('\n')
             todos.pop(index)
 
-            write_todos('todos.txt', todos)
+            functions.write_todos('todos.txt', todos)
             
             message = f"Todo {todo_to_remove} was removed from the list."
             print(message)
