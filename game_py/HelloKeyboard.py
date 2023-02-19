@@ -43,7 +43,6 @@ while not game_over:
 
     if x < 0:
         x = 0
-
     if y > (screen.get_height() - spriteHeight):
         y = screen.get_height() - spriteHeight
 
