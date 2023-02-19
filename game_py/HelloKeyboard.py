@@ -21,6 +21,10 @@ while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
+        elif event.type == pygame.MOUSEMOTION:
+            x, y = event.pos
+            x -= spriteWidth/2
+            y -= spriteHeight/2
     pressed = pygame.key.get_pressed()
 
     if pressed[K_UP]:
