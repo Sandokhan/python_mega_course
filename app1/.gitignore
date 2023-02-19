@@ -1,3 +1,7 @@
 files/
 __pycache__/
 bonus/__pycache__/
+bonus/dest/
+../.DS_Store
+.DS_Store
+bonus/.DS_Store
