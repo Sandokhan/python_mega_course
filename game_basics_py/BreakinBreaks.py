@@ -15,7 +15,7 @@ bat_rect = bat.get_rect()
 ball = pygame.image.load('./images/football.png')
 ball = ball.convert_alpha()
 ball_rect = ball.get_rect()
-ball_start = (200, 200)
+ball_start = (250, 250)
 ball_speed = (3.0, 3.0)
 ball_served = False
 speedx, speedy = ball_speed
@@ -77,6 +77,25 @@ while not game_over:
         speedx *= 1.01
         speedy *= 1.01
         continue
+
+    delete_bricks = None
+    for b in bricks:
+        bx, by = b
+        if bx <= ball_rect[0] <= bx + brick_rect.width and by <= ball_rect[1] <= by + brick_rect.height :
+            delete_bricks = b
+
+            if ball_rect[0] <= bx + 2:
+                speedx *= -1
+            elif ball_rect[0] <= bx + brick_rect.width - 2:
+                speedx *= -1
+            if ball_rect[1] <= by + 2:
+                speedy *= -1
+            elif ball_rect[1] <= by + brick_rect.height - 2:
+                speedy *= -1
+            break
+
+    if delete_bricks is not None:
+        bricks.remove(delete_bricks)
 
     # Top
     if ball_rect[1] <= 0:
