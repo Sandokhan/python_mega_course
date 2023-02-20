@@ -70,14 +70,22 @@ while not game_over:
     if pressed[K_SPACE]:
         ball_served = True
 
+    if bat_rect[0] + bat_rect.width >= ball_rect[0] >= bat_rect[0] and \
+            ball_rect[1] + ball_rect.height >= bat_rect[1] and speedy > 0:
+        speedy *= -1
+        # Increase dificulty
+        speedx *= 1.01
+        speedy *= 1.01
+        continue
+
     # Top
     if ball_rect[1] <= 0:
         ball_rect[1] = 0
         speedy *= -1
     # Bottom
     if ball_rect[1] >= screen.get_height() - ball_rect.height:
-        ball_rect[1] = screen.get_height() - ball_rect.height
-        speedy *= -1
+        ball_served = False
+        ball_rect.topleft = ball_start
     # Left
     if ball_rect[0] <= 0:
         ball_rect[0] = 0
