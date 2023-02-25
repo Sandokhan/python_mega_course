@@ -1,6 +1,7 @@
 import pygame
 from pygame import Vector2
-from pygame import rotozoom
+from pygame.transform import rotozoom
+from random import randint
 
 
 class Ship:
@@ -25,14 +26,21 @@ class Ship:
         blit_position = self.position - rotated_surface_size // 2
         screen.blit(rotated_surface, blit_position)
 
+
 class Asteroid:
 
     def __init__(self, position):
         self.position = Vector2(position)
+        self.velocity = Vector2(randint(-3, 3), randint(-3, 3))
         self.image = pygame.image.load('images/asteroid1.png')
 
     def update(self):
-        pass
+        self.position += self.velocity
+        if self.position.x < out_of_bound[0] or self.position.x > out_of_bound[2]:
+            self.velocity.x *= -1
+        if self.position.y < out_of_bound[1] or self.position.x > out_of_bound[3]:
+            self.velocity.y *= -1
+
 
     def draw(self, position):
         screen.blit(self.image, self.position)
@@ -50,7 +58,9 @@ background = pygame.image.load('images/space.png')
 
 game_over = False
 ship = Ship((100, 700))
-astro1 = Asteroid((235, 345))
+asteroids = [Asteroid((randint(0, screen.get_width()), randint(0, screen.get_height()))) for i in range(10)]
+
+out_of_bound = [-150, -150, 950, 950]
 clock = pygame.time.Clock()
 
 while not game_over:
@@ -64,8 +74,9 @@ while not game_over:
         ship.update()
         ship.draw(screen)
 
-        astro1.update()
-        astro1.draw(screen)
+        for a in asteroids:
+            a.update()
+            a.draw(screen)
 
         pygame.display.update()
 pygame.quit()
