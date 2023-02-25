@@ -6,3 +6,6 @@ bonus/dest/
 .DS_Store
 bonus/.DS_Store
 .idea/
+.idea/other.xml
+Chess/__pycache__/
+Mancala/__pycache__/
