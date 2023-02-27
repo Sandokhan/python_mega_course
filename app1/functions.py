@@ -1,4 +1,11 @@
+import os
+
 FILEPATH = './files/todos.txt'
+
+if not os.path.exists(FILEPATH):
+    with open(FILEPATH, 'w') as file:
+        pass
+
 
 def get_todos(filename=FILEPATH):
     """ Read a text file and return the list of
