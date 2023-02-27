@@ -1,4 +1,5 @@
-files/
+app1/files/
+app1/bonus/files/
 __pycache__/
 bonus/__pycache__/
 bonus/dest/
@@ -9,3 +10,4 @@ bonus/.DS_Store
 .idea/other.xml
 Chess/__pycache__/
 Mancala/__pycache__/
+.idea/python_mega_course.iml
